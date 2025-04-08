@@ -1,0 +1,22 @@
+type Cart {
+    id: ID!
+    userId: String!
+    items: [CartItem!]!
+}
+
+type CartItem {
+    id: ID!
+    productId: ID!
+    quantity: Int!
+}
+
+type Query {
+    cart(userId: String!): Cart
+}
+
+type Mutation {
+    addCartItem(userId: String!, productId: ID!, quantity: Int!): Cart
+    updateCartItem(userId: String!, itemId: ID!, quantity: Int!): Cart
+    removeCartItem(userId: String!, itemId: ID!): Cart
+    clearCart(userId: String!): String
+}
