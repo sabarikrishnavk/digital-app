@@ -35,8 +35,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-graphql</artifactId>
-        </dependency>
-
+        </dependency> 
+            <dependency>
+                <groupId>com.apollographql.federation</groupId>
+                <artifactId>federation-graphql-java-support</artifactId> 
+            </dependency>
         <!-- Database -->
         <dependency>
             <groupId>org.postgresql</groupId>

@@ -11,10 +11,10 @@
 
     <modules>
         <module>cart-service</module>
+        <module>user-service</module>
         <!-- <module>api-gateway</module>
         <module>order-service</module>
         <module>product-service</module>
-        <module>user-service</module>
         <module>config-server</module>
         <module>event-publisher-service</module>
         <module>flink-jobs</module> -->
@@ -23,7 +23,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <spring-boot.version>3.1.2</spring-boot.version>
+        <spring-boot.version>3.4.4</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <flink.version>1.17.0</flink.version>
         <postgresql.version>42.6.0</postgresql.version>
@@ -59,6 +59,11 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
+            </dependency> 
+            <dependency>
+                <groupId>com.apollographql.federation</groupId>
+                <artifactId>federation-graphql-java-support</artifactId>
+                <version>5.3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
@@ -86,12 +91,14 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
+                    <version>3.8.1</version>
                     <configuration>
+                        <parameters>true</parameters> <!-- This is the important line -->
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                     </configuration>
-                </plugin>
+                </plugin> 
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
