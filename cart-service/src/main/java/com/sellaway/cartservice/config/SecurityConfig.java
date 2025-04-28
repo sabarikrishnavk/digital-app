@@ -26,7 +26,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless API
             .authorizeHttpRequests(auth -> auth
                 // Secure cart endpoints and GraphQL endpoint
-                .requestMatchers("/carts/**", "/graphql/**", "/graphiql/**").authenticated()
+                .requestMatchers("/carts/**", "/graphql/**").authenticated() //, "/graphiql/**"
                 .anyRequest().permitAll() // Allow access to actuator, swagger, etc. if needed, or deny by default
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session

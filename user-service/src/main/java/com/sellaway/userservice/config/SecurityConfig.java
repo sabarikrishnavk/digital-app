@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
                 // "/auth/**" already covers "/auth/register" and "/auth/login"
                 .requestMatchers("/auth/**", "/graphql", "/graphiql/**").permitAll()
                 .anyRequest().authenticated()
-            )
+            ) 
              .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // Stateless session
              // We don't need the JWT filter here *yet* as we are only *generating* tokens
  

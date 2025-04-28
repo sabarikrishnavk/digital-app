@@ -1,22 +1,35 @@
 type Cart {
-    id: ID!
-    userId: String!
-    items: [CartItem!]!
+  id: ID!
+  userId: String! # Keep this in the Cart type itself
+  items: [CartItem!]!
 }
 
 type CartItem {
-    id: ID!
-    productId: ID!
-    quantity: Int!
+  id: ID!
+  productId: ID!
+  quantity: Int!
 }
 
 type Query {
-    cart(userId: String!): Cart
+  # Removed userId argument. The resolver will use the authenticated user.
+  cart: Cart
 }
 
 type Mutation {
-    addCartItem(userId: String!, productId: ID!, quantity: Int!): Cart
-    updateCartItem(userId: String!, itemId: ID!, quantity: Int!): Cart
-    removeCartItem(userId: String!, itemId: ID!): Cart
-    clearCart(userId: String!): String
+  # Mutations might still need userId if they can be performed *by* one user *on behalf of* another (e.g., admin),
+  # OR they can also be updated to use the authenticated user's ID implicitly.
+  # Let's assume for now they also operate on the authenticated user's cart.
+  # If you need admin capabilities, you might keep userId and add authorization checks.
+
+  # Option 1: Mutations also use authenticated user (most common for user-specific actions)
+  addCartItem(productId: Int!, quantity: Int!): Cart
+  #   updateCartItem(itemId: ID!, quantity: Int!): Cart
+  #   removeCartItem(itemId: ID!): Cart
+  #   clearCart: String # Returns String based on original schema
+
+  # Option 2: Keep userId in mutations (if needed for admin/other scenarios) - Requires authorization logic
+  # addCartItem(userId: String!, productId: ID!, quantity: Int!): Cart
+  # updateCartItem(userId: String!, itemId: ID!, quantity: Int!): Cart
+  # removeCartItem(userId: String!, itemId: ID!): Cart
+  # clearCart(userId: String!): String
 }

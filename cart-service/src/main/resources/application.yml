@@ -1,6 +1,7 @@
 server:
   port: 8081
-
+jwt:
+  secret: YourVerySecretKeyWhichShouldBeLongAndSecureAndStoredSafelyPreferablyNotInCodebase
 spring:
   application:
     name: cart-service
@@ -21,4 +22,3 @@ spring:
   graphql:
     graphiql:
       enabled: true
-
